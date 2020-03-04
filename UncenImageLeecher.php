@@ -1,5 +1,5 @@
-<title>Uncen.net 18+ Image Leaker by LilShieru</title>
-<h1>Uncen.net 18+ Image Leaker</h1>
+<title>Uncen.net 18+ Image Leecher by LilShieru</title>
+<h1>Uncen.net 18+ Image Leecher</h1>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
@@ -28,7 +28,7 @@
 </style>
 <?php
 if ($_GET["leakUrl"] == "") {
-    echo '<h3>Chọn một mục cần leak:</h3>';
+    echo '<h3>Chọn một mục cần leech:</h3>';
 }
 else {
     echo '<h3 id="name">Đang xem mục </h3><br><button onclick="View()" style="font-size:20pt">Xem ảnh</button> <button onclick="BBCode()" style="font-size:20pt">Lấy BBCode</button><br><br><div id="results"></div><br><div>Nếu không thấy ảnh ở bên trên dòng này, hãy thử tải lại trang.</div>';
