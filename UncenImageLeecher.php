@@ -31,7 +31,7 @@ if ($_GET["leakUrl"] == "") {
     echo '<h3>Chọn một mục cần leech:</h3>';
 }
 else {
-    echo '<h3 id="name">Đang xem mục </h3><br><button onclick="View()" style="font-size:20pt">Xem ảnh</button> <button onclick="BBCode()" style="font-size:20pt">Lấy BBCode</button><br><br><div id="results"></div><br><div>Nếu không thấy ảnh ở bên trên dòng này, hãy thử tải lại trang.</div>';
+    echo '<h3 id="name">Đang xem mục </h3><br><button onclick="View()" style="font-size:20pt">Xem ảnh</button> <button onclick="BBCode()" style="font-size:20pt">Lấy BBCode</button> <button onclick="Share()" style="font-size:20pt">Chia sẻ link</button><br><br><div id="results"></div><br><div>Nếu không thấy ảnh ở bên trên dòng này, hãy thử tải lại trang.</div>';
 }
 ?>
 <ul id="list"></ul>
@@ -90,7 +90,7 @@ function get_fcontent( $url,  $javascript_loop = 0, $timeout = 5 ) {
 if ($_GET["leakUrl"] == "") {
     echo '<br><br><div>Nếu không thấy mục nào trong danh sách, hãy thử tải lại trang.</div><script>
         for (var i = 0; i < document.getElementsByClassName(\'section pt-0\')[0].getElementsByClassName(\'book__img-inner\').length; i++) {
-            document.getElementById(\'list\').innerHTML += "<li><a href=\'https://lilshieru.ga/UncenImgLeaker.php?leakUrl=" + document.getElementsByClassName(\'section pt-0\')[0].getElementsByClassName(\'book\')[i].getAttribute(\'href\') + "\'>" + document.getElementsByClassName(\'section pt-0\')[0].getElementsByClassName(\'book__img-inner\')[i].getElementsByClassName(\'book__chapter\')[0].innerText + "</a></li><br>";
+            document.getElementById(\'list\').innerHTML += "<li><a href=\'?leakUrl=" + document.getElementsByClassName(\'section pt-0\')[0].getElementsByClassName(\'book\')[i].getAttribute(\'href\') + "\'>" + document.getElementsByClassName(\'section pt-0\')[0].getElementsByClassName(\'book__img-inner\')[i].getElementsByClassName(\'book__chapter\')[0].innerText + "</a></li><br>";
         }
     </script>';
 }
@@ -101,7 +101,18 @@ else {
 }
 ?>
 <script>
-    var bbcode = false, view = false;
+for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+    var src = document.getElementsByTagName("script")[i].getAttribute("src");
+	if (src != null) {
+        if (src.indexOf("ad") != -1 || src.indexOf("google") != -1) {
+            document.getElementsByTagName("script")[i].parentNode.removeChild(document.getElementsByTagName("script")[i]);
+        }
+        if (document.getElementsByTagName("script")[i].innerHTML.indexOf("ad") != -1) {
+            document.getElementsByTagName("script")[i].parentNode.removeChild(document.getElementsByTagName("script")[i]);
+        }
+    }
+}
+    var bbcode = false, view = false, share = false;
     function View() {
         if (!view) {
             for (var i = 0; i < images.length; i++) {
@@ -119,6 +130,12 @@ else {
             code += "</textarea><br><br>"
             document.getElementById("results").innerHTML = code + document.getElementById("results").innerHTML;
             bbcode = true;
+        }
+    }
+    function Share() {
+        if (!share) {
+            document.getElementById("results").innerHTML = "Link gốc từ bên uncen.net: <input style='width: 400px' value='<?php echo $_GET['leakUrl']; ?>'/><br>Link dẫn tới Leecher: <input style='width: 400px' value='"+ window.location.href + "'/><br><br>"  + document.getElementById("results").innerHTML;
+            share = true;
         }
     }
 </script>
